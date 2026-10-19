@@ -9,7 +9,15 @@
   :root { --bg:#0b1020; --panel:#141b30; --txt:#eef2ff; --mut:#8e9ac0; --acc:#3b7bf0; --acc2:#3cc4c8; }
   * { box-sizing:border-box; margin:0; }
   html,body { height:100%; background:var(--bg); color:var(--txt); font-family:-apple-system,"Segoe UI",Roboto,sans-serif; }
-  body { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:16px; }
+  body { display:flex; align-items:center; justify-content:center; padding:16px; }
+  #app { width:100%; max-width:1600px; display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:16px; align-items:center; }
+  #app.sin-form { grid-template-columns:minmax(0,1fr); }
+  #app.sin-form #formulario { display:none; }
+  #video { display:flex; flex-direction:column; align-items:center; gap:14px; min-width:0; }
+  #formulario { height:calc(100vh - 32px); display:flex; flex-direction:column; background:var(--panel); border-radius:10px; overflow:hidden; }
+  #formulario header { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; font-size:14px; font-weight:600; }
+  #formulario header button { width:30px; height:30px; font-size:14px; }
+  #formulario iframe { flex:1; width:100%; border:0; background:#fff; }
   #escena { position:relative; width:min(100%, calc((100vh - 110px) * 16 / 9)); aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); }
   #escena img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity .6s ease; }
   #escena img.on { opacity:1; }
@@ -20,8 +28,17 @@
   .grande { border:0; cursor:pointer; color:#fff; font-size:clamp(16px,2.4vw,22px); font-weight:600; padding:.8em 1.8em; border-radius:999px; background:linear-gradient(90deg,var(--acc),var(--acc2)); box-shadow:0 8px 24px rgba(59,123,240,.45); }
   .grande:hover { filter:brightness(1.1); }
   #barra { width:min(100%, calc((100vh - 110px) * 16 / 9)); display:flex; align-items:center; gap:10px; }
-  #barra button { border:0; cursor:pointer; background:var(--panel); color:var(--txt); width:42px; height:42px; border-radius:50%; font-size:17px; }
-  #barra button:hover { background:#1e2845; }
+  #barra button, #formulario header button { border:0; cursor:pointer; background:var(--panel); color:var(--txt); width:42px; height:42px; border-radius:50%; font-size:17px; }
+  #barra button:hover, #formulario header button:hover { background:#1e2845; }
+  #barra #form-btn { width:auto; border-radius:999px; padding:0 14px; font-size:14px; white-space:nowrap; }
+  .secundario { border:1px solid #3a4673; background:transparent; color:var(--txt); cursor:pointer; font-size:15px; padding:.65em 1.4em; border-radius:999px; }
+  .secundario:hover { background:#1e2845; }
+  @media (max-width:900px) {
+    body { align-items:flex-start; }
+    #app { grid-template-columns:minmax(0,1fr); align-items:start; }
+    #formulario { height:85vh; }
+    #escena, #barra { width:100%; }
+  }
   #barra button:disabled { opacity:.35; cursor:default; }
   #prog { flex:1; height:6px; background:var(--panel); border-radius:3px; overflow:hidden; }
   #prog i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--acc),var(--acc2)); transition:width .4s; }
@@ -29,6 +46,8 @@
 </style>
 </head>
 <body>
+<div id="app" class="sin-form">
+<section id="video">
 <div id="escena">
   <img id="a" alt=""><img id="b" alt="">
   <div id="inicio" class="velo on">
@@ -40,6 +59,7 @@
     <h1>Gracias por escuchar</h1>
     <p>Si quieres conversar, estamos a un mensaje de distancia.</p>
     <button class="grande" id="reiniciar">↻ Volver a comenzar</button>
+    <button class="secundario" id="fin-form">📝 Responder formulario</button>
   </div>
 </div>
 <div id="barra">
@@ -48,6 +68,13 @@
   <button id="sig" title="Siguiente" aria-label="Siguiente">⏭</button>
   <div id="prog"><i></i></div>
   <span id="num">1 / 20</span>
+  <button id="form-btn" title="Mostrar u ocultar el formulario">📝 Formulario</button>
+</div>
+</section>
+<aside id="formulario">
+  <header><span>Cuéntanos qué te pareció</span><button id="form-cerrar" title="Ocultar formulario" aria-label="Ocultar formulario">✕</button></header>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfwbjcsbpcgVx4kOpdIDN6GkgGgWC2bHl-S_dS9dAfUwbuZzA/viewform?embedded=true" title="Formulario" loading="lazy">Cargando…</iframe>
+</aside>
 </div>
 <script>
 const N = 20, PAUSA_MS = 900;
@@ -109,6 +136,17 @@ document.addEventListener("keydown", e => {
   if (e.code === "ArrowRight") $("sig").click();
   if (e.code === "ArrowLeft") $("ant").click();
 });
+
+// Formulario: abierto de entrada en pantallas anchas; en celular, bajo el video al pedirlo
+const app = $("app"), ancho = () => matchMedia("(min-width: 901px)").matches;
+function formulario(abrir) {
+  app.classList.toggle("sin-form", !abrir);
+  if (abrir && !ancho()) setTimeout(() => $("formulario").scrollIntoView({ behavior: "smooth" }), 50);
+}
+$("form-btn").onclick = () => formulario(app.classList.contains("sin-form"));
+$("form-cerrar").onclick = () => formulario(false);
+$("fin-form").onclick = () => formulario(true);
+if (ancho()) formulario(true);
 
 imgs[0].src = "slides/01.webp"; imgs[0].classList.add("on"); $("ant").disabled = true; precargar(1);
 </script>
