@@ -18,7 +18,7 @@
   #formulario header { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; font-size:14px; font-weight:600; }
   #formulario header button { width:30px; height:30px; font-size:14px; }
   #formulario iframe { flex:1; width:100%; border:0; background:#fff; }
-  #escena { position:relative; width:min(100%, calc((100vh - 110px) * 16 / 9)); aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  #escena { position:relative; width:min(100%, calc((100vh - 190px) * 16 / 9)); aspect-ratio:16/9; background:#000; border-radius:10px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); }
   #escena img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity .6s ease; }
   #escena img.on { opacity:1; }
   .velo { position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:18px; background:rgba(11,16,32,.72); backdrop-filter:blur(6px); text-align:center; padding:20px; }
@@ -27,9 +27,14 @@
   .velo p { color:var(--mut); font-size:clamp(13px,1.8vw,17px); max-width:34em; }
   .grande { border:0; cursor:pointer; color:#fff; font-size:clamp(16px,2.4vw,22px); font-weight:600; padding:.8em 1.8em; border-radius:999px; background:linear-gradient(90deg,var(--acc),var(--acc2)); box-shadow:0 8px 24px rgba(59,123,240,.45); }
   .grande:hover { filter:brightness(1.1); }
-  #barra { width:min(100%, calc((100vh - 110px) * 16 / 9)); display:flex; align-items:center; gap:10px; }
+  #subs { width:min(100%, calc((100vh - 190px) * 16 / 9)); min-height:3.1em; display:flex; align-items:center; justify-content:center; text-align:center; font-size:clamp(15px,1.7vw,21px); line-height:1.4; padding:0 8px; }
+  #subs.off { display:none; }
+  #subs span { transition:opacity .2s; }
+  #barra { width:min(100%, calc((100vh - 190px) * 16 / 9)); display:flex; align-items:center; gap:10px; }
   #barra button, #formulario header button { border:0; cursor:pointer; background:var(--panel); color:var(--txt); width:42px; height:42px; border-radius:50%; font-size:17px; }
   #barra button:hover, #formulario header button:hover { background:#1e2845; }
+  #barra #cc { width:auto; border-radius:999px; padding:0 12px; font-size:13px; font-weight:700; }
+  #barra #cc.off { opacity:.45; }
   #barra #vel { width:auto; border-radius:999px; padding:0 12px; font-size:14px; font-variant-numeric:tabular-nums; min-width:54px; }
   #barra #form-btn { width:auto; border-radius:999px; padding:0 14px; font-size:14px; white-space:nowrap; }
   .secundario { border:1px solid #3a4673; background:transparent; color:var(--txt); cursor:pointer; font-size:15px; padding:.65em 1.4em; border-radius:999px; }
@@ -38,7 +43,7 @@
     body { align-items:flex-start; }
     #app { grid-template-columns:minmax(0,1fr); align-items:start; }
     #formulario { height:85vh; }
-    #escena, #barra { width:100%; }
+    #escena, #barra, #subs { width:100%; }
   }
   #barra button:disabled { opacity:.35; cursor:default; }
   #prog { flex:1; height:6px; background:var(--panel); border-radius:3px; overflow:hidden; }
@@ -63,12 +68,14 @@
     <button class="secundario" id="fin-form">📝 Responder formulario</button>
   </div>
 </div>
+<div id="subs" aria-live="off"><span></span></div>
 <div id="barra">
   <button id="ant" title="Anterior" aria-label="Anterior">⏮</button>
   <button id="pp" title="Pausar / reanudar" aria-label="Pausar o reanudar">⏸</button>
   <button id="sig" title="Siguiente" aria-label="Siguiente">⏭</button>
   <div id="prog"><i></i></div>
   <span id="num">1 / 20</span>
+  <button id="cc" title="Mostrar u ocultar subtítulos" aria-label="Subtítulos">CC</button>
   <button id="vel" title="Velocidad de reproducción" aria-label="Velocidad de reproducción">1×</button>
   <button id="form-btn" title="Mostrar u ocultar el formulario">📝 Formulario</button>
 </div>
@@ -147,6 +154,27 @@ document.addEventListener("keydown", e => {
   if (e.code === "ArrowRight") $("sig").click();
   if (e.code === "ArrowLeft") $("ant").click();
 });
+
+// Subtítulos: frases con su tiempo real en el audio (subs.json lo genera construir.py)
+let subs = {}, fraseActual = -1, fraseSlide = -1;
+fetch("subs.json").then(r => r.json()).then(j => { subs = j; }).catch(() => {});
+function subtitulo() {
+  const lista = subs[actual + 1];
+  if (lista && !$("subs").classList.contains("off")) {
+    const t = audio.currentTime;
+    let k = -1;
+    for (let j = 0; j < lista.length && lista[j][0] <= t + 0.05; j++) k = j;
+    if (k !== fraseActual || actual !== fraseSlide) {
+      fraseActual = k; fraseSlide = actual;
+      $("subs").firstElementChild.textContent = k >= 0 ? lista[k][1] : "";
+    }
+  }
+}
+setInterval(subtitulo, 100);
+$("cc").onclick = () => {
+  const off = $("subs").classList.toggle("off");
+  $("cc").classList.toggle("off", off); fraseActual = -1;
+};
 
 // Formulario: abierto de entrada en pantallas anchas; en celular, bajo el video al pedirlo
 const app = $("app"), ancho = () => matchMedia("(min-width: 901px)").matches;

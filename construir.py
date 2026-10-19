@@ -28,18 +28,64 @@ TEXTOS = [
 "Y para cerrar, la oportunidad concreta: una Ronda Puente de trescientos millones de pesos, a través de un instrumento llamado seif, con tope de valorización y tasa de descuento. La siguiente ronda será en unos dieciocho meses, con una valorización proyectada de entre nueve y trece millones de dólares. Y el exit esperado es de entre diez y cien veces lo invertido, en un plazo de tres a cinco años. La ronda cubre la mitad de los pilotos y las ventas, mientras que el producto y la evidencia clínica los financia Lanek. En total, equivale al treinta por ciento del presupuesto de la Fase uno.",
 ]
 
+# Cómo se escribe en los subtítulos lo que se dice distinto para que la voz lo lea bien
+SUBTITULOS = [
+    ("quince años de I más D", "15 años de I+D"), ("dos mil veintiuno", "2021"), ("dos mil veinticinco", "2025"),
+    ("dos mil veintisiete", "2027"), ("dos mil veintiocho", "2028"), ("dos mil veintidós", "2022"), ("dos mil treinta", "2030"),
+    ("treinta y tres mil", "33 mil"), ("veinte minutos", "20 minutos"), ("siete días", "7 días"),
+    ("veinticinco por ciento", "25%"), ("ochenta por ciento", "80%"), ("setenta y cinco por ciento", "75%"),
+    ("treinta por ciento", "30%"), ("cinco veces", "5 veces"), ("veinte a más de trescientos setenta", "20 a más de 370"),
+    ("Jóspital at Jóum", "Hospital at Home"), ("U C C", "UCC"), ("E R P", "ERP"), ("Crístus", "Christus"),
+    ("seiscientas camas", "600 camas"), ("cuatrocientos mil dólares", "US$400k"), ("cuatro hospitales", "4 hospitales"),
+    ("cuatro más", "4 más"), ("un millón y medio de dólares", "1,5 millones de USD"), ("doscientos mil dólares", "200k USD"),
+    ("entre diez y cien veces", "entre 10x y 100x"), ("doce meses", "12 meses"), ("trescientos millones de pesos", "CLP 300M"),
+    ("seif", "SAFE"), ("dieciocho meses", "18 meses"), ("entre nueve y trece millones de dólares", "USD 9–13M"),
+    ("Fase uno", "Fase 1"), ("cuarto emprendimiento", "4° emprendimiento"), ("hace seis años", "hace 6 años"),
+    ("hace tres años", "hace 3 años"), ("a tres años", "a 3 años"),
+]
+
+def frases(texto, palabras):
+    """Agrupa las palabras (con su tiempo real de la voz) en frases cortas para subtitular."""
+    fichas = texto.split()
+    assert len(fichas) == len(palabras), (len(fichas), len(palabras))
+    grupos, act = [], []
+    for f, p in zip(fichas, palabras):
+        act.append((f, p))
+        largo = len(" ".join(x[0] for x in act))
+        if (f[-1] in ".?!;" ) or (f[-1] in ",:" and largo >= 45) or (largo >= 105 and f not in ("Jóspital", "at")):  # no partir 'Jóspital at Jóum'
+            grupos.append(act); act = []
+    if act: grupos.append(act)
+    out = []
+    for g in grupos:
+        t = " ".join(x[0] for x in g)
+        for a, b in SUBTITULOS: t = t.replace(a, b)
+        out.append([round(g[0][1] / 1e7, 2), t])
+    return out
+
 def slides():
     d = fitz.open(PDF)
     for i, p in enumerate(d):
         p.get_pixmap(dpi=170, clip=fitz.Rect(49.6, 0, 741.6, 388.8)).save(f"slides/{i+1:02d}.png")
+    # (las PNG se pasaron a WebP y se recortaron 4 px a los lados a mano)
 
 async def audios(solo=None):
+    import json
+    subs = {}
     for i, t in enumerate(TEXTOS):
         if solo and (i + 1) not in solo: continue
-        await edge_tts.Communicate(t, VOZ, rate=RITMO, pitch=TONO).save(f"audio/{i+1:02d}.mp3")
-        print("audio", i + 1, flush=True)
+        for intento in range(5):  # a veces el servicio devuelve menos tiempos de palabra: se repite
+            com = edge_tts.Communicate(t, VOZ, rate=RITMO, pitch=TONO, boundary="WordBoundary")
+            mp3, offsets = b"", []
+            async for ch in com.stream():
+                if ch["type"] == "audio": mp3 += ch["data"]
+                elif ch["type"] == "WordBoundary": offsets.append(ch["offset"])
+            if len(offsets) == len(t.split()): break
+        open(f"audio/{i+1:02d}.mp3", "wb").write(mp3)
+        subs[i + 1] = frases(t, offsets)
+        print("audio", i + 1, len(subs[i + 1]), "frases", flush=True)
+    json.dump(subs, open("subs.json", "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 
 if __name__ == "__main__":
     assert len(TEXTOS) == 20
-    slides()
-    asyncio.run(audios())
+    if "slides" in sys.argv: slides()
+    if "audios" in sys.argv: asyncio.run(audios())

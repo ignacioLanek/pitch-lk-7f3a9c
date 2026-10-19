@@ -1,0 +1,670 @@
+{
+"1": [
+[
+0.1,
+"¡Hola!"
+],
+[
+1.23,
+"Qué gusto tenerlos aquí."
+],
+[
+3.21,
+"Les voy a presentar Lanek Home: salud más allá del hospital."
+]
+],
+"2": [
+[
+0.1,
+"Soy Ignacio Contreras, cofundador y CEO de Lanek,"
+],
+[
+3.07,
+"mi 4° emprendimiento, que comenzó hace 6 años cuando conocí a Matías y Alejandro,"
+],
+[
+7.82,
+"dos investigadores reconocidos internacionalmente,"
+],
+[
+10.61,
+"con una vasta experiencia creando nuevas tecnologías para la salud,"
+],
+[
+14.17,
+"trabajando con las mejores universidades y organizaciones de salud del mundo."
+],
+[
+18.53,
+"Junto con ellos, Iver, fundador de una clínica y experto en salud,"
+],
+[
+22.64,
+"y Johannes, que ya venía trabajando con Matías y Alejandro,"
+],
+[
+26.05,
+"fundamos Lanek."
+],
+[
+27.71,
+"Esto es ciencia real, con rigor."
+]
+],
+"3": [
+[
+0.1,
+"Una empresa dedicada al desarrollo de productos y tecnologías para la salud,"
+],
+[
+3.89,
+"que nace como resultado de más de 15 años de I+D en la academia."
+],
+[
+8.29,
+"Comenzamos en 2021 haciendo dispositivos especializados para el monitoreo y análisis de la voz"
+],
+[
+13.62,
+"y el movimiento humano."
+],
+[
+15.54,
+"Luego pasamos a utilizar el celular como monitor de salud,"
+],
+[
+18.55,
+"y desde 2025 estamos trabajando en Lanek Home."
+]
+],
+"4": [
+[
+0.1,
+"Que es un sistema inteligente, una plataforma de hospitalización y atención clínica en casa."
+],
+[
+5.53,
+"Con lo cual ayudamos a clínicas, hospitales y prestadores de salud en general,"
+],
+[
+9.65,
+"a atender más pacientes con el mismo personal y sin invertir en más infraestructura."
+],
+[
+14.51,
+"¡Todo esto de manera segura y escalable!"
+]
+],
+"5": [
+[
+0.1,
+"Entonces, el objetivo de esta presentación es contarles sobre el negocio,"
+],
+[
+4.11,
+"comenzando con la problemática y cómo nuestro producto la soluciona,"
+],
+[
+7.52,
+"hasta el modelo de negocios y el roadmap que estamos ejecutando para escalar el negocio a toda Latam,"
+],
+[
+12.62,
+"y luego a nivel global."
+]
+],
+"6": [
+[
+0.1,
+"¿Por qué es tan importante el tema?"
+],
+[
+2.41,
+"Porque todos sabemos que como humanidad tenemos una gran deuda en lo que respecta a darle acceso a salud a"
+],
+[
+7.12,
+"las personas, y es un problema global, urgente y no resuelto."
+],
+[
+11.44,
+"Más de la mitad de las personas del mundo no tiene acceso a atención básica de salud."
+]
+],
+"7": [
+[
+0.1,
+"Y si hacemos doble clic en el problema, es fácil identificar que el gran cuello de botella que frena todo"
+],
+[
+5.21,
+"es la falta de camas hospitalarias."
+],
+[
+7.86,
+"Aunque construyamos más quirófanos o mejoremos la atención,"
+],
+[
+10.93,
+"sin camas se frena todo."
+],
+[
+12.97,
+"Y construirlas simplemente no es factible: necesitaríamos más de 33 mil nuevos hospitales solo"
+],
+[
+18.56,
+"para Latam."
+],
+[
+19.9,
+"Y por ejemplo, una persona puede tener una intervención o atención de 20 minutos,"
+],
+[
+24.22,
+"y luego usar una cama por 7 días."
+],
+[
+27.08,
+"En una gran mayoría de los casos, esa persona,"
+],
+[
+29.91,
+"al segundo o tercer día, ya podría irse a su casa y seguir su tratamiento de manera remota."
+],
+[
+35.67,
+"Pero no se hace, primero, porque no se logran identificar los candidatos,"
+],
+[
+39.92,
+"y segundo, por la falta de un sistema seguro y escalable de monitoreo remoto."
+],
+[
+44.87,
+"¡Pero si cubrimos esos dos puntos, esa cama automáticamente duplica y más su disponibilidad para atender a"
+],
+[
+50.37,
+"un nuevo paciente!"
+]
+],
+"8": [
+[
+0.1,
+"Entonces, ¿cómo lo hacemos?"
+],
+[
+2.56,
+"Lo primero es la capacidad de usar cualquier teléfono celular como un monitor de salud multimodal."
+],
+[
+8.17,
+"¿Qué quiere decir esto?"
+],
+[
+9.95,
+"Que la plataforma consume todos los datos disponibles."
+],
+[
+13.47,
+"Si la persona tiene un reloj inteligente o usa un dispositivo médico en casa,"
+],
+[
+17.67,
+"se puede integrar directamente, o lo puede registrar mediante la app,"
+],
+[
+21.26,
+"e incluso basta con sacarle una foto al dispositivo para registrar la medición en el sistema."
+]
+],
+"9": [
+[
+0.1,
+"Y no solo eso."
+],
+[
+1.75,
+"Gracias a nuestra tecnología de evaluación de salud mediante biomarcadores digitales,"
+],
+[
+5.93,
+"el sistema puede monitorear incluso sin la necesidad de otros dispositivos."
+],
+[
+10.57,
+"Basta con un video del paciente para poder obtener sus signos vitales y otros indicadores claves para el seguimiento"
+],
+[
+15.95,
+"de tratamientos, programas de pacientes crónicos,"
+],
+[
+18.8,
+"e incluso prevención para las personas en general."
+]
+],
+"10": [
+[
+0.1,
+"Ahora, cómo es el producto en concreto."
+],
+[
+2.99,
+"Todo esto se integra a una plataforma que permite gestionar toda la población de pacientes,"
+],
+[
+7.51,
+"tanto hospitalizados como ambulatorios, optimizando el uso de recursos y aumentando la capacidad de atención,"
+],
+[
+13.33,
+"mediante dos grandes aplicaciones: la de Atención en Casa y monitoreo remoto,"
+],
+[
+17.6,
+"y la Torre de Control, para la gestión clínica eficiente y segura."
+]
+],
+"11": [
+[
+0.1,
+"Otro de los beneficios de la solución es que cuenta con un módulo de derivación,"
+],
+[
+3.89,
+"que monitorea continuamente a los pacientes hospitalizados en la clínica u hospital,"
+],
+[
+8.2,
+"para identificar y recomendar candidatos a seguir su tratamiento en casa."
+],
+[
+12.58,
+"¡Así el sistema comienza destrabando desde la causa raíz!"
+]
+],
+"12": [
+[
+0.1,
+"Y es que los estudios muestran que un 25% de los pacientes hospitalizados podrían seguir"
+],
+[
+4.96,
+"su tratamiento en casa y no lo hacen;"
+],
+[
+7.18,
+"por lo que identificarlos aumenta inmediatamente la disponibilidad de camas."
+],
+[
+11.68,
+"Asimismo, el costo de un día en hospitalización domiciliaria con Lanek es hasta un 80% más"
+],
+[
+17.18,
+"económico que un día en hospital."
+],
+[
+19.71,
+"Y el monitoreo remoto permite atender hasta 5 veces más pacientes con el mismo personal."
+],
+[
+25.08,
+"Por último, y dado que liberar camas permite de por sí atender más pacientes,"
+],
+[
+29.2,
+"y considerando que hasta el 75% de las utilidades de un prestador pueden venir del"
+],
+[
+33.98,
+"quirófano, aumentar su productividad impacta directamente el resultado económico."
+]
+],
+"13": [
+[
+0.1,
+"Es por esto que se observa un mercado creciente y activo,"
+],
+[
+2.9,
+"donde se destaca una gran oportunidad en Latam."
+],
+[
+6.0,
+"En los últimos cinco años, Estados Unidos pasó de 20 a más de 370 programas de Hospital at Home,"
+],
+[
+12.14,
+"con políticas hasta 2030."
+],
+[
+14.71,
+"Todo ese boom pasó en inglés, y el idioma es clave en biomarcadores digitales."
+],
+[
+19.61,
+"Latam está desatendido, por eso es un océano azul que vamos a ir a dominar."
+],
+[
+24.43,
+"Además, en Chile ya hay reglamento propio de hospitalización en casa desde 2022,"
+],
+[
+29.51,
+"y este año se codificó y arancelizó la hospitalización domiciliaria."
+],
+[
+33.89,
+"Por lo tanto, ¡el timing y el territorio para ingresar al mercado es ideal!"
+]
+],
+"14": [
+[
+0.1,
+"Y junto con esto, contamos con importantes y robustos diferenciadores que nos permiten no solo lograr superar"
+],
+[
+5.54,
+"las barreras propias de los mercados objetivos,"
+],
+[
+8.0,
+"sino también generar sólidas barreras de entrada,"
+],
+[
+10.71,
+"como protección frente a otros competidores."
+],
+[
+13.62,
+"En Latam hay pocos actores relevantes, y esto es porque los grandes competidores globales están explotando"
+],
+[
+18.81,
+"otros mercados, dejando a Latam y al mundo hispanohablante desatendido."
+],
+[
+23.3,
+"Entonces, si nos comparamos con competidores directos,"
+],
+[
+26.49,
+"con todos tenemos importantes ventajas competitivas,"
+],
+[
+29.46,
+"entre las que destaco que abordamos el ciclo desde el hospital con la derivación,"
+],
+[
+33.34,
+"y tenemos un sistema de monitoreo multimodal interoperable."
+],
+[
+37.08,
+"Y hay otras herramientas que son más bien ERP,"
+],
+[
+39.66,
+"pero sin el componente clínico, y por eso es que la hospitalización domiciliaria se realiza hoy en Chile,"
+],
+[
+45.12,
+"pero no es escalable y es muy limitada."
+]
+],
+"15": [
+[
+0.1,
+"Ahora, entrando más directamente al negocio."
+],
+[
+3.41,
+"Hoy en día estamos implementando la plataforma en la red UCC,"
+],
+[
+6.63,
+"la red de salud privada más importante de Chile,"
+],
+[
+9.26,
+"con más de 600 camas, que pertenece a la Red Christus,"
+],
+[
+12.66,
+"con presencia en Latam y Estados Unidos."
+],
+[
+15.52,
+"Con ellos cerramos un acuerdo por US$400k,"
+],
+[
+18.43,
+"a 3 años, para implementar nuestra tecnología en sus servicios de hospitalización domiciliaria y pacientes"
+],
+[
+23.89,
+"crónicos."
+]
+],
+"16": [
+[
+0.1,
+"Y junto con esto, tenemos un pipeline activo,"
+],
+[
+2.89,
+"con 4 hospitales y clínicas ya comprometidas para pilotear,"
+],
+[
+6.22,
+"y 4 más en proceso de acuerdo de pilotajes comerciales,"
+],
+[
+9.41,
+"con intención de compra."
+],
+[
+11.28,
+"Hemos invertido más de 1,5 millones de USD en investigación,"
+],
+[
+14.8,
+"desarrollo y validaciones clínicas y comerciales."
+],
+[
+18.23,
+"Además, hace 3 años abrimos una línea de negocios temprana,"
+],
+[
+21.86,
+"que se llama Lanek Labs, donde ya vendemos soluciones al mismo segmento de clientes,"
+],
+[
+26.23,
+"pero en formato de servicios, y esa línea proyecta 200k USD de ingresos en los próximos doce"
+],
+[
+31.7,
+"meses, con un crecimiento sostenido del 30% en ventas."
+],
+[
+36.03,
+"Pero esta es una línea estratégica temporal, que nos da ingresos tempranos y,"
+],
+[
+40.03,
+"sobre todo, posicionamiento y acceso a los primeros clientes."
+]
+],
+"17": [
+[
+0.1,
+"Pero el negocio que estamos escalando de verdad es Lanek Home,"
+],
+[
+3.12,
+"que se comercializa con un modelo de plataforma como servicio."
+],
+[
+6.85,
+"Es decir, los clientes pagan un recurrente anual fijo,"
+],
+[
+9.93,
+"más un variable en función del uso, es decir,"
+],
+[
+12.56,
+"pacientes por día y complejidad clínica."
+],
+[
+15.45,
+"Nuestros clientes son clínicas y home cares en el mundo privado,"
+],
+[
+18.54,
+"y hospitales y servicios de salud en el público."
+],
+[
+21.69,
+"Existen otros actores que se benefician e influyen en la decisión de compra,"
+],
+[
+25.52,
+"y para todos tenemos una propuesta de valor clara."
+],
+[
+28.72,
+"Asimismo, hay otros segmentos que iremos explotando en el futuro,"
+],
+[
+32.36,
+"pero de momento estamos enfocados en estos clientes,"
+],
+[
+35.12,
+"dado que junto con la validación comercial, avanzamos en la validación y respaldo clínico."
+],
+[
+40.37,
+"En este momento estamos entrando al mercado con este modelo de ingresos recurrente,"
+],
+[
+44.42,
+"por lo que se espera que vaya iterando."
+],
+[
+46.82,
+"No obstante, podemos estimar con bastante seguridad indicadores como los que se muestran aquí,"
+],
+[
+51.78,
+"destacando lo positivo de la rentabilidad, pero también identificando el desafío de enfrentar largos ciclos"
+],
+[
+57.21,
+"de venta y dinero."
+],
+[
+58.81,
+"Pero lo más importante es la expansión dentro de cada cliente nuevo:"
+],
+[
+62.15,
+"la idea es que con Lanek Home, cada cliente crece exponencialmente,"
+],
+[
+65.86,
+"y por lo tanto, ¡nuestro negocio también!"
+]
+],
+"18": [
+[
+0.1,
+"Y para ir finalizando, solo contarles que hoy en día estamos realizando los primeros pilotos comerciales,"
+],
+[
+5.67,
+"y durante 2027 seguiremos entrando al mercado chileno,"
+],
+[
+9.24,
+"que es nuestro punto de entrada, para luego, en 2028,"
+],
+[
+13.15,
+"realizar una ronda Pre Serie A para consolidar Chile y comenzar la expansión por Latam,"
+],
+[
+17.52,
+"que a su vez será financiada por la primera ronda Serie A."
+],
+[
+21.08,
+"Ya en ese momento, el plan para ir más allá de Latam es acompañado de algún líder global,"
+],
+[
+25.89,
+"proyectando un exit con una rentabilidad esperada de entre 10x y 100x lo invertido en las rondas anteriores."
+]
+],
+"19": [
+[
+0.1,
+"Por lo tanto, y resumiendo: tenemos el equipo,"
+],
+[
+3.01,
+"el producto, ya estamos entrando al mercado, y tenemos un plan claro de escalamiento."
+],
+[
+8.46,
+"Por lo que si les interesa ahondar en algún punto,"
+],
+[
+10.89,
+"o tienen dudas, les propongo que conversemos al respecto."
+]
+],
+"20": [
+[
+0.1,
+"Y para cerrar, la oportunidad concreta: una Ronda Puente de CLP 300M,"
+],
+[
+5.2,
+"a través de un instrumento llamado SAFE, con tope de valorización y tasa de descuento."
+],
+[
+10.37,
+"La siguiente ronda será en unos 18 meses,"
+],
+[
+13.0,
+"con una valorización proyectada de USD 9–13M."
+],
+[
+17.51,
+"Y el exit esperado es de entre 10x y 100x lo invertido,"
+],
+[
+20.75,
+"en un plazo de tres a cinco años."
+],
+[
+23.41,
+"La ronda cubre la mitad de los pilotos y las ventas,"
+],
+[
+26.05,
+"mientras que el producto y la evidencia clínica los financia Lanek."
+],
+[
+30.0,
+"En total, equivale al 30% del presupuesto de la Fase 1."
+]
+]
+}
