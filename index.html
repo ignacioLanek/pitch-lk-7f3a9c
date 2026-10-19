@@ -30,6 +30,7 @@
   #barra { width:min(100%, calc((100vh - 110px) * 16 / 9)); display:flex; align-items:center; gap:10px; }
   #barra button, #formulario header button { border:0; cursor:pointer; background:var(--panel); color:var(--txt); width:42px; height:42px; border-radius:50%; font-size:17px; }
   #barra button:hover, #formulario header button:hover { background:#1e2845; }
+  #barra #vel { width:auto; border-radius:999px; padding:0 12px; font-size:14px; font-variant-numeric:tabular-nums; min-width:54px; }
   #barra #form-btn { width:auto; border-radius:999px; padding:0 14px; font-size:14px; white-space:nowrap; }
   .secundario { border:1px solid #3a4673; background:transparent; color:var(--txt); cursor:pointer; font-size:15px; padding:.65em 1.4em; border-radius:999px; }
   .secundario:hover { background:#1e2845; }
@@ -68,6 +69,7 @@
   <button id="sig" title="Siguiente" aria-label="Siguiente">⏭</button>
   <div id="prog"><i></i></div>
   <span id="num">1 / 20</span>
+  <button id="vel" title="Velocidad de reproducción" aria-label="Velocidad de reproducción">1×</button>
   <button id="form-btn" title="Mostrar u ocultar el formulario">📝 Formulario</button>
 </div>
 </section>
@@ -83,6 +85,9 @@ const $ = id => document.getElementById(id);
 const imgs = [$("a"), $("b")];
 const audio = new Audio();
 let actual = 0, capa = 0, activo = false, espera = null;
+const VELOCIDADES = [1, 1.5, 2];
+let vel = 1;
+audio.defaultPlaybackRate = 1;
 
 // precarga de la siguiente diapositiva y su audio
 const cache = {};
@@ -107,6 +112,7 @@ function reproducir(i) {
   clearTimeout(espera);
   actual = i; mostrar(i);
   audio.src = `audio/${pad(i)}.mp3`;
+  audio.playbackRate = vel;
   audio.play().catch(() => pausar());
   precargar(i + 1);
   $("pp").textContent = "⏸";
@@ -115,7 +121,7 @@ function reproducir(i) {
 audio.addEventListener("ended", () => {
   if (!activo) return;
   if (actual === N - 1) { $("prog").firstElementChild.style.width = "100%"; $("fin").classList.add("on"); return; }
-  espera = setTimeout(() => reproducir(actual + 1), PAUSA_MS);
+  espera = setTimeout(() => reproducir(actual + 1), PAUSA_MS / vel);
 });
 
 function pausar() { activo = false; clearTimeout(espera); audio.pause(); $("pp").textContent = "▶"; }
@@ -128,6 +134,11 @@ function ir(i) { if (i < 0 || i >= N) return; $("fin").classList.remove("on"); a
 $("comenzar").onclick = () => { $("inicio").classList.remove("on"); ir(0); };
 $("reiniciar").onclick = () => ir(0);
 $("pp").onclick = () => (activo ? pausar() : seguir());
+$("vel").onclick = () => {
+  vel = VELOCIDADES[(VELOCIDADES.indexOf(vel) + 1) % VELOCIDADES.length];
+  audio.defaultPlaybackRate = audio.playbackRate = vel;
+  $("vel").textContent = `${vel}×`;
+};
 $("sig").onclick = () => ir(actual + 1);
 $("ant").onclick = () => ir(actual - 1);
 document.addEventListener("keydown", e => {
