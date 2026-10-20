@@ -33,6 +33,18 @@
   #barra { width:min(100%, calc((100vh - 190px) * 16 / 9)); display:flex; align-items:center; gap:10px; }
   #barra button, #formulario header button { border:0; cursor:pointer; background:var(--panel); color:var(--txt); width:42px; height:42px; border-radius:50%; font-size:17px; }
   #barra button:hover, #formulario header button:hover { background:#1e2845; }
+  #barra { flex-wrap:wrap; }
+  #vol { display:flex; align-items:center; gap:6px; }
+  #vol input { width:84px; accent-color:var(--acc); cursor:pointer; }
+  #barra #mute { font-size:18px; }
+  #barra a#descargar { display:inline-flex; align-items:center; height:42px; padding:0 14px; border-radius:999px; background:var(--panel); color:var(--txt); font-size:14px; text-decoration:none; white-space:nowrap; }
+  #barra a#descargar:hover { background:#1e2845; }
+  @media (max-width:600px) {
+    #num, #vol input, .lbl { display:none; }
+    #barra #form-btn, #barra a#descargar { padding:0; width:42px; justify-content:center; }
+    #barra { gap:8px; }
+    #barra #prog { order:20; flex:1 0 100%; }
+  }
   #barra #cc { width:auto; border-radius:999px; padding:0 12px; font-size:13px; font-weight:700; }
   #barra #cc.off { opacity:.45; }
   #barra #vel { width:auto; border-radius:999px; padding:0 12px; font-size:14px; font-variant-numeric:tabular-nums; min-width:54px; }
@@ -75,9 +87,11 @@
   <button id="sig" title="Siguiente" aria-label="Siguiente">⏭</button>
   <div id="prog"><i></i></div>
   <span id="num">1 / 20</span>
+  <div id="vol"><button id="mute" title="Silenciar" aria-label="Silenciar">🔊</button><input id="volumen" type="range" min="0" max="1" step="0.05" value="1" aria-label="Volumen"></div>
   <button id="cc" title="Mostrar u ocultar subtítulos" aria-label="Subtítulos">CC</button>
   <button id="vel" title="Velocidad de reproducción" aria-label="Velocidad de reproducción">1×</button>
-  <button id="form-btn" title="Mostrar u ocultar el formulario">📝 Formulario</button>
+  <button id="form-btn" title="Mostrar u ocultar el formulario">📝<span class="lbl"> Formulario</span></button>
+  <a id="descargar" href="Lanek-Home-Pitch-Deck.pdf" download title="Descargar el deck en PDF" aria-label="Descargar el deck">⬇<span class="lbl">&nbsp;Deck</span></a>
 </div>
 </section>
 <aside id="formulario">
@@ -154,6 +168,26 @@ document.addEventListener("keydown", e => {
   if (e.code === "ArrowRight") $("sig").click();
   if (e.code === "ArrowLeft") $("ant").click();
 });
+
+// Volumen y silencio (el mismo objeto de audio se reutiliza, así que se mantienen entre diapositivas)
+function iconoVolumen() {
+  const v = audio.muted ? 0 : audio.volume;
+  $("mute").textContent = v === 0 ? "🔇" : v < 0.5 ? "🔉" : "🔊";
+  $("mute").title = audio.muted ? "Activar sonido" : "Silenciar";
+}
+$("volumen").oninput = e => {
+  audio.volume = +e.target.value;
+  audio.muted = audio.volume === 0;
+  iconoVolumen();
+};
+$("mute").onclick = () => {
+  if (audio.muted || audio.volume === 0) {
+    audio.muted = false;
+    if (audio.volume === 0) { audio.volume = 0.6; $("volumen").value = 0.6; }
+  } else audio.muted = true;
+  iconoVolumen();
+};
+document.addEventListener("keydown", e => { if (e.key === "m" || e.key === "M") $("mute").click(); });
 
 // Subtítulos: frases con su tiempo real en el audio (subs.json lo genera construir.py)
 let subs = {}, fraseActual = -1, fraseSlide = -1;
